@@ -128,7 +128,7 @@ SORTKEY (o_orderdate);
 ALTER TABLE public.bad_orders ALTER DISTKEY o_shippriority;
 ```
 
-## SCAER Add IAM screenshot
+![GitHub Logo](/images/toronto_iam.jpg)
 
 Get the IAM role from the Redshift Console, in the cluster details, under ‘See IAM Roles’. 
 
