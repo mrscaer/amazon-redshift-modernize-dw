@@ -14,7 +14,7 @@ Please get the workshop account credentials from the workshop leaders.
 
 # SECTION #1: Setup and Encoding (~30 minutes)
 
-### Challenge #1a: Login with the provided credentials and spin-up an environment using a CloudFormation template:
+### Challenge #1a: Login with the provided credentials. This will automatically spin-up an environment using a CloudFormation template:
 
 Login with the provided workshop credentials.
 
