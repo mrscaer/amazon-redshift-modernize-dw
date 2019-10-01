@@ -31,12 +31,37 @@ And/or watch the Redshift Console 'Clusters' section for the cluster to become a
 
 Please proceed with the workshop once the Redshift cluster is available.
 
-### Challenge #1b: Connect to the Redshift cluster with the built-in query editor:
+### Challenge #1b: Connect to the Redshift cluster with the built-in query editor and create a view that is used later:
 
 Find and connect to the Query Editor. The defaults for the workshop are:
 
 * DB: dev
 * Master Username: awsuser
+
+Here's the SQL for the view:
+
+```
+CREATE OR REPLACE VIEW public.v_describe_table AS
+SELECT DISTINCT 
+       a.attnum AS column_position,
+       n.nspname AS schema_name,
+       c.relname AS table_name,
+       a.attname AS column_name,
+       pg_catalog.format_type(a.atttypid,a.atttypmod) AS data_type,
+       pg_catalog.format_encoding(a.attencodingtype) AS compression_type,
+       CASE WHEN a.attisdistkey IS TRUE THEN a.attisdistkey ELSE NULL END AS distkey,
+       CASE WHEN a.attsortkeyord > 0 THEN a.attsortkeyord ELSE NULL END AS sortkey
+FROM pg_catalog.pg_namespace n,
+     pg_catalog.pg_class c,
+     pg_catalog.pg_attribute a,
+     pg_catalog.pg_stats stats
+WHERE n.oid = c.relnamespace
+AND   c.oid = a.attrelid
+AND   a.attnum > 0
+AND   c.relname NOT LIKE '%pkey' 
+ORDER BY A.ATTNUM;
+```
+
 
 
 ### Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
