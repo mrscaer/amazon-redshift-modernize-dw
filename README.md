@@ -124,7 +124,7 @@ Redshift has the ability to run stored procedures, try the stored proc "MinAnaly
 
 
 
-## Section #2: Distribution (~30 minutes)
+# Section #2: Distribution (~30 minutes)
 
 ### Challenge #2a: Use the (simulated) Redshift Advisor to identify a table with row skew.
 The Redshift Advisor is an important element of Redshift’s ease of use proposition. Looking at the example Advisor alert, build a skewed table, understand the magnitude of the tuning opportunity, then quickly resolve the issue.
@@ -239,7 +239,7 @@ Note: The hueristic being used by Redshift takes into account several considerat
 
 ![GitHub Logo](/images/toronto_advisor_dist_key.jpg)
 
-## Section #3: Sort Key Columns (~30 minutes)
+# Section #3: Sort Key Columns (~30 minutes)
 
 ### Introduction:
 One of the tools for querying very large tables quickly is to implement a sort key, which can be several columns. Redshift will physically reorder the data to minimize the amount of scanning that would otherwise be required. You use the Redshift sort key in a similar way as you would use partition elimination in other databases.
@@ -304,7 +304,7 @@ INSERT INTO public.orders_no_sort SELECT * FROM public.orders;
 ANALYZE public.orders_no_sort;
 ```
 
-## Section #4: Workload Management (WLM) (~30 minutes)
+# Section #4: Workload Management (WLM) (~30 minutes)
 ### Introduction:
 Redshift Workload Management (WLM) is largely an automated process where the cluster administrator defines categories of workload defined by either the user’s group affiliation or a declared query group, and assigns a priority (such as Low, Normal, High) so Redshift knows how much of the system to allocate per bucket. If the administrator chooses to do so, they can further define the number of simultaneous jobs per category and the percent of the cluster’s memory reserved per job. Most workloads should consider the first option (Auto WLM with Priorities) before experimenting with a manual WLM setting.
 
@@ -397,7 +397,7 @@ Implement a solution using the wildcard option. How can this simplify the rules 
 * How to use snapshot to create a QA or DEV cluster quickly?
 * How can you use Amazon QuickSight to crawl and then visualize your Redshift data?
 
-## Before You Leave
+# Before You Leave
 When you are done with the workshop, feel free to delete the stack from the CloudFormation Console.
 
 ![GitHub Logo](/images/toronto_advisor_stack_delete.jpg)
