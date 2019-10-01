@@ -12,9 +12,9 @@ In this lab you will launch a new Redshift Cluster, setup connectivity and work 
 ## Before You Begin
 Please get the workshop account credentials from the workshop leaders.
 
-## SECTION #1: Setup and Encoding (~30 minutes)
+# SECTION #1: Setup and Encoding (~30 minutes)
 
-### Challenge #1a: Login with the provided credentials and spin-up an environment using a CloudFormation template:
+## Challenge #1a: Login with the provided credentials and spin-up an environment using a CloudFormation template:
 
 Login with the provided workshop credentials.
 
@@ -24,7 +24,7 @@ Launch the CloudFormation template by pasting this into the browser: [https://co
 
 
 
-###Challenge #1b: Connect to the Redshift cluster with the built-in query editor:*
+##Challenge #1b: Connect to the Redshift cluster with the built-in query editor:*
 
 Find and connect to the Query Editor. The defaults for the workshop are:
 
@@ -32,7 +32,7 @@ Find and connect to the Query Editor. The defaults for the workshop are:
 * Master Username: awsuser
 * Password: Awsuser123
 
-###Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
+##Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
 
 The Redshift Advisor is an important element of Redshift’s ease of use. The Advisor will warn if there are tables without compression, which in turn leads to scanning work than would otherwise be required to execute the query.
 
@@ -86,7 +86,7 @@ ORDER BY 1,2
 ;
 ```
 
-###Bonus Challenge #1d: Used a stored procedure to analyze a single 'best' column
+## Bonus Challenge #1d: Used a stored procedure to analyze a single 'best' column
 
 Redshift has the ability to run stored procedures, try the stored proc "MinAnalyze" to quickly collect stats on public.uncompressed columns. How is this different from ANALYZE PREDICATE COLUMNS? The procedure is in the Redshift Engineer's GitHub repository: [https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/MinAnalyze.sql](https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/MinAnalyze.sql)
 
@@ -164,7 +164,7 @@ ORDER BY s.node, s.slice
 ;
 ```
 
-###Challenge #2d: Change the distribution key on the table with an ALTER TABLE command:
+### Challenge #2d: Change the distribution key on the table with an ALTER TABLE command:
 
 Changing the table distribution can be done with the ALTER TABLE command:
 
