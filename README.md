@@ -277,32 +277,97 @@ ORDER BY slice, segment, step
 ```
 
 ### Challenge #3b: Working with sort keys to improve query performance: 
-For the purpose of analysis, let’s build a version of the public.orders table without the sort key defined, hold everything else constant.
+For the purpose of analysis, let’s build two versions of the public.orders table and compare the number of rows needed to be scanned with and without a sort key column.
+
+Create and populate the version of the table with the sort key defined.
 
 ```
-CREATE TABLE public.orders_no_sort
+CREATE TABLE public.orders_sort 
 (
-o_orderkey BIGINT ENCODE lzo,
-o_custkey BIGINT ENCODE lzo,
-o_orderstatus CHARACTER VARYING(1) ENCODE lzo,
-o_totalprice NUMERIC(18,4) ENCODE lzo,
-o_orderdate DATE ENCODE raw,
-o_orderpriority CHARACTER VARYING(15) ENCODE lzo,
-o_clerk CHARACTER VARYING(15) ENCODE lzo,
-o_shippriority INTEGER ENCODE lzo,
-o_comment CHARACTER VARYING(79) ENCODE lzo
-)
-DISTSTYLE KEY DISTKEY (o_orderkey)
-;
+  o_orderkey        BIGINT,
+  o_custkey         BIGINT,
+  o_orderstatus     CHARACTER VARYING(1),
+  o_totalprice      NUMERIC(18,4),
+  o_orderdate       DATE SORTKEY,
+  o_orderpriority   CHARACTER VARYING(15),
+  o_clerk           CHARACTER VARYING(15),
+  o_shippriority    INTEGER,
+  o_comment         CHARACTER VARYING(79)
+);
+
+INSERT INTO public.orders_sort SELECT * FROM public.orders;
+ANALYZE public.orders_sort;
+VACUUM public.orders_sort;
 ```
 
+Now, a version without the sort key, but holding everything else constant.
+
 ```
+CREATE TABLE public.orders_no_sort 
+(
+  o_orderkey        BIGINT,
+  o_custkey         BIGINT,
+  o_orderstatus     CHARACTER VARYING(1),
+  o_totalprice      NUMERIC(18,4),
+  o_orderdate       DATE,
+  o_orderpriority   CHARACTER VARYING(15),
+  o_clerk           CHARACTER VARYING(15),
+  o_shippriority    INTEGER,
+  o_comment         CHARACTER VARYING(79)
+);
+
 INSERT INTO public.orders_no_sort SELECT * FROM public.orders;
+ANALYZE public.orders_no_sort;
+VACUUM public.orders_no_sort;
 ```
 
+Now, test the performance of both tables on (otherwise) the same SQL. Get the query ID for later analysis:
+
 ```
-ANALYZE public.orders_no_sort;
+SELECT MIN(o_custkey),
+       MAX(o_custkey)
+FROM (SELECT o_custkey,
+             SUM(o_totalprice)
+      FROM orders_sort
+      WHERE o_orderdate BETWEEN '1992-07-05' AND '1992-07-07'
+      GROUP BY o_custkey
+      )
+;
+
+SELECT pg_last_query_id();
+
+SELECT MIN(o_custkey),
+       MAX(o_custkey)
+FROM (SELECT o_custkey,
+             SUM(o_totalprice)
+      FROM orders_no_sort
+      WHERE o_orderdate BETWEEN '1992-07-05' AND '1992-07-07'
+      GROUP BY o_custkey
+     )
+;
+
+SELECT pg_last_query_id();
 ```
+
+Then, look at the number of rows processed in the columns 'rows_pre_filter' and 'rows_pre_user_filter' for your two queries
+
+```
+SELECT query,
+       slice,
+       rows_pre_filter,
+       rows_pre_user_filter,
+       perm_table_name,
+       ROWS,
+       bytes
+FROM stl_scan
+WHERE query IN ({your comma-delimited query IDs go here.})
+ORDER BY 1,2
+;
+
+```
+
+
+
 
 # Section #4: Workload Management (WLM) (~30 minutes)
 ### Introduction:
