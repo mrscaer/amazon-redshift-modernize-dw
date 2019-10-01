@@ -94,7 +94,7 @@ Redshift has the ability to run stored procedures, try the stored proc "MinAnaly
 
 ## Section #2: Distribution (~30 minutes)
 
-###Challenge #2a: Use the (simulated) Redshift Advisor to identify a table with row skew.
+### Challenge #2a: Use the (simulated) Redshift Advisor to identify a table with row skew.
 The Redshift Advisor is an important element of Redshift’s ease of use. Looking at the example Advisor alert, build a skewed table, understand the magnitude of the tuning opportunity, then quickly resolve the issue.
 
 
@@ -142,7 +142,7 @@ region 'us-west-2'
 lzop delimiter '|' ;
 ```
 
-###Challenge #2c: Try a few ways to see the skew information. 
+### Challenge #2c: Try a few ways to see the skew information. 
 Use the SVV\_TABLE\_INFO to see the skew:
 ```
    SELECT * FROM svv_table_info;
