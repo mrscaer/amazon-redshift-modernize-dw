@@ -22,7 +22,7 @@ Change to the correct region (us-west-2).
 
 Launch the CloudFormation template by pasting this into the browser: [https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=ImmersionLab2&templateURL=https://s3-us-west-2.amazonaws.com/redshift-immersionday-labs/lab2+cluster.yaml](https://console.aws.amazon.com/cloudformation/home?#/stacks/new?stackName=ImmersionLab2&templateURL=https://s3-us-west-2.amazonaws.com/redshift-immersionday-labs/lab2+cluster.yaml) 
 
-
+![GitHub Logo](/images/toronto_advisor_stack_create.jpg)
 
 ### Challenge #1b: Connect to the Redshift cluster with the built-in query editor:*
 
