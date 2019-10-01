@@ -14,7 +14,7 @@ Please get the workshop account credentials from the workshop leaders.
 
 # SECTION #1: Setup and Encoding (~30 minutes)
 
-## Challenge #1a: Login with the provided credentials and spin-up an environment using a CloudFormation template:
+### Challenge #1a: Login with the provided credentials and spin-up an environment using a CloudFormation template:
 
 Login with the provided workshop credentials.
 
@@ -24,7 +24,7 @@ Launch the CloudFormation template by pasting this into the browser: [https://co
 
 
 
-##Challenge #1b: Connect to the Redshift cluster with the built-in query editor:*
+### Challenge #1b: Connect to the Redshift cluster with the built-in query editor:*
 
 Find and connect to the Query Editor. The defaults for the workshop are:
 
@@ -32,7 +32,7 @@ Find and connect to the Query Editor. The defaults for the workshop are:
 * Master Username: awsuser
 * Password: Awsuser123
 
-##Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
+### Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
 
 The Redshift Advisor is an important element of Redshift’s ease of use. The Advisor will warn if there are tables without compression, which in turn leads to scanning work than would otherwise be required to execute the query.
 
@@ -86,7 +86,7 @@ ORDER BY 1,2
 ;
 ```
 
-## Bonus Challenge #1d: Used a stored procedure to analyze a single 'best' column
+### Bonus Challenge #1d: Used a stored procedure to analyze a single 'best' column
 
 Redshift has the ability to run stored procedures, try the stored proc "MinAnalyze" to quickly collect stats on public.uncompressed columns. How is this different from ANALYZE PREDICATE COLUMNS? The procedure is in the Redshift Engineer's GitHub repository: [https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/MinAnalyze.sql](https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/MinAnalyze.sql)
 
@@ -101,7 +101,7 @@ The Redshift Advisor is an important element of Redshift’s ease of use. Lookin
 ## SCAER Add Advisor (skew)
 
 
-###Challenge #2b: Deliberately create and populate a table with high row skew to see how we can analyze it.
+### Challenge #2b: Deliberately create and populate a table with high row skew to see how we can analyze it.
 
 
 
@@ -172,7 +172,7 @@ Changing the table distribution can be done with the ALTER TABLE command:
   ALTER TABLE public.bad_orders ALTER DISTKEY o_orderkey;
 ```
 
-###Bonus Challenge #2e: Working with Redshift AUTO distribution. 
+### Bonus Challenge #2e: Working with Redshift AUTO distribution. 
 
 *SCAER: Can’t get an example of a AUTO(ALL) created. Seems to immediately go to AUTO(EVEN)*
 *******************
@@ -191,12 +191,12 @@ region 'us-east-1' gzip delimiter '|' COMPUPDATE OFF MANIFEST
 
 ## Section #3: Sort Key Columns (~30 minutes)
 
-###Introduction:
+### Introduction:
 One of the tools for querying very large tables quickly is to implement a sort key, which can be several columns. Redshift will physically reorder the data to minimize the amount of scanning that would otherwise be required. You use the Redshift sort key in a similar way as you would use partition elimination in other databases.
 
 Inherent to Redshift is a min and max value for each 1MB block for each column for each table. This in-memory structure is called the zone map. By identifying a sort key set of the columns, Redshift can amplify the effectiveness of the zone map. 
 
-###Challenge #3a: Quantify the query benefit of Redshift automatically using the zone map on a table:
+### Challenge #3a: Quantify the query benefit of Redshift automatically using the zone map on a table:
 Study the decrease in the amount of data scanned between the two queries, nothing that column ‘o\_totalprice’ isn’t part of the sort key. The decrease is attributed to Redshift leveraging the zone map and only looking at blocks where the ‘o_totalprice’ for a particular block is between the min and max according to the zone map. No user action is ever required with respect to the zone map, it’s an embedded and automatic feature of the service.
 
 ```
@@ -226,7 +226,7 @@ ORDER BY slice, segment, step
 ;
 ```
 
-###Challenge #3b: Working with sort keys to improve query performance: 
+### Challenge #3b: Working with sort keys to improve query performance: 
 For the purpose of analysis, let’s build a version of the public.orders table without the sort key defined, hold everything else constant.
 
 ```
@@ -255,19 +255,19 @@ ANALYZE public.orders_no_sort;
 ```
 
 ## Section #4: Workload Management (WLM) (~30 minutes)
-###Introduction:
+### Introduction:
 Redshift Workload Management (WLM) is largely an automated process where the cluster administrator defines categories of workload defined by either the user’s group affiliation or a declared query group, and assigns a priority (such as Low, Normal, High) so Redshift knows how much of the system to allocate per bucket. If the administrator chooses to do so, they can further define the number of simultaneous jobs per category and the percent of the cluster’s memory reserved per job. Most workloads should consider the first option (Auto WLM with Priorities) before experimenting with a manual WLM setting.
 
 The Redshift Advisor can warn on underutilized categories of workload. For example, if the College Intern group was given their own WLM queue, but they’ve all returned to school, the queue would be unused. This is primarily a concern for the manual WLM setting described in the second scenario above.
 
-###Challenge #4a: Setting-up with Auto WLM with Priorities:
+### Challenge #4a: Setting-up with Auto WLM with Priorities:
 On the Redshift Console, choose ‘Workload management’ from the left nav, then create a new Parameter Group.
 Confirm that the parameter is already in Auto WLM with Priorities (or switch it to Auto WLM with Priorities).
 Create at least two queues, their names and priorities (Lowest, Low, Normal, etc.) are up to you. 
 Use the Query Group option to identify jobs that should run in each queue. Note the Default queue for all other jobs.
 Save your changes to the Parameter Group, then update the cluster to use the new Parameter Group. Note this will require a bounce of the cluster (this is only required when the number of WLM queues is changing).
 
-###Challenge #4b: Working with Auto WLM with Priorities:
+### Challenge #4b: Working with Auto WLM with Priorities:
 From the Query editor, write a couple of SQL statements (at least one per queue you defined), then set a session variable to assign each query to one of the query groups, such as:
 
 ```
@@ -300,7 +300,7 @@ LIMIT 25;
 
 Try switching to other query_groups and noting how WLM routes the jobs.
 
-###Challenge #4c: Using database User Group with Auto WLM with Priorities:
+### Challenge #4c: Using database User Group with Auto WLM with Priorities:
 Another popular way to route jobs through Redshift Workload Management is to assign entire user groups to WLM queues. To test this, you’ll need to create a handful of users, create some number of groups, and update your Parameter Group to use the user group.
 
 Make any users and groups that you want, below is included as an example:
@@ -337,7 +337,7 @@ Test by using some of the users/groups you created above, and evaluate with the 
 * What’s the relationship between the User and Query groups? Is access to the WLM an ‘AND’ or an ‘OR’ relationship between the two groups?
 * What would be a scenario where this relationship could be especially useful?
 
-###Bonus Challenge #4d: Test the wildcard option for either User or Query Groups.
+### Bonus Challenge #4d: Test the wildcard option for either User or Query Groups.
 Implement a solution using the wildcard option. How can this simplify the rules (and number of queues)?
 
 ## Bonus
