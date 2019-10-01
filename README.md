@@ -206,20 +206,38 @@ Changing the table distribution can be done with the ALTER TABLE command:
 
 ### Bonus Challenge #2e: Working with Redshift AUTO distribution. 
 
-*SCAER: Can’t get an example of a AUTO(ALL) created. Seems to immediately go to AUTO(EVEN)*
-*******************
-Text to be edited - Below text from Juan 
-*******************
-If we don’t use spectrum, region doesn’t matter, copy works fine for cross region data loading.
-For auto distribution, it depends on both row count and table size(so may depend on the size of cluster as well), the threshold is very low.  Dataset has 10K-20K rows and not wide can be good candidate.
-you can try supplier table from tpch-1GB dataset which has 10K rows. On my single node cluster,  the distribution will be Auto(ALL) the first loading, and Auto(Even) the second time. If you reduce the input data by half, the distribution style will change at 4th  loading.
+Launch in Q1 2019, Redshift can now pick the table distibution for you, and even update the distribution style as the number of rows in the table increases. You can test this by creating a table and running a few COPY commands:
+
+Create a test table:
+```
+CREATE TABLE IF NOT EXISTS public.supplier_test (
+  s_suppkey bigint 
+ ,s_name character varying(25) 
+ ,s_address character varying(40) 
+ ,s_nationkey bigint 
+ ,s_phone character varying(15) 
+ ,s_acctbal numeric(18,4) 
+ ,s_comment character varying(101) 
+) 
+DISTSTYLE AUTO /* <--- This is actually optional, as it's the default for the CREATE TABLE command. */
+;
+```
+
+Load the table with data from S3 using the COPY command:
 
 ```
-COPY supplier FROM 's3://redshift-managed-loads-datasets-us-east-1/dataset=tpch/size=1GB/table=supplier/supplier.manifest'
-iam_role ‘’
-region 'us-east-1' gzip delimiter '|' COMPUPDATE OFF MANIFEST
+COPY supplier_test FROM 's3://redshift-managed-loads-datasets-us-east-1/dataset=tpch/size=1GB/table=supplier/supplier.manifest'
+iam_role 'arn:aws:iam::999999999999:role/RedshiftImmersionRole' /* <-- Your role goes here. */
+region 'us-east-1' gzip delimiter '|' COMPUPDATE OFF MANIFEST;
 ```
 
+Now, query the SVV_TABLE_INFO view and note the column 'diststyle'.
+
+Run the COPY command again, followed by the SVV_TABLE_INFO query. After a few loops, did you see the distribution style change automatically on the table?
+
+Note: The hueristic being used by Redshift takes into account several considerations (such as cluster size and number of blocks); so it's not possible to document the rules that would correct across the entire Redshift fleet. The Redshift Advisor now makes recommendations for distribution key changes based on actual query patterns:
+
+![GitHub Logo](/images/toronto_advisor_dist_key.jpg)
 
 ## Section #3: Sort Key Columns (~30 minutes)
 
