@@ -30,13 +30,13 @@ Find and connect to the Query Editor. The defaults for the workshop are:
 
 * DB: dev
 * Master Username: awsuser
-* Password: Awsuser123
+
 
 ### Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
 
 The Redshift Advisor is an important element of Redshift’s ease of use. The Advisor will warn if there are tables without compression, which in turn leads to scanning work than would otherwise be required to execute the query.
 
-## SCAER Add Advisor (uncompressed table)
+![GitHub Logo](/images/toronto_advisor_compress_table.jpg)
 
 Query the Redshift system view SVV_TABLE_INFO to see the list of tables on the cluster.
 
@@ -98,7 +98,7 @@ Redshift has the ability to run stored procedures, try the stored proc "MinAnaly
 The Redshift Advisor is an important element of Redshift’s ease of use. Looking at the example Advisor alert, build a skewed table, understand the magnitude of the tuning opportunity, then quickly resolve the issue.
 
 
-## SCAER Add Advisor (skew)
+![GitHub Logo](/images/toronto_advisor_skewed_table.jpg)
 
 
 ### Challenge #2b: Deliberately create and populate a table with high row skew to see how we can analyze it.
@@ -260,6 +260,9 @@ Redshift Workload Management (WLM) is largely an automated process where the clu
 
 The Redshift Advisor can warn on underutilized categories of workload. For example, if the College Intern group was given their own WLM queue, but they’ve all returned to school, the queue would be unused. This is primarily a concern for the manual WLM setting described in the second scenario above.
 
+![GitHub Logo](/images/toronto_advisor_wlm.jpg)
+
+
 ### Challenge #4a: Setting-up with Auto WLM with Priorities:
 On the Redshift Console, choose ‘Workload management’ from the left nav, then create a new Parameter Group.
 Confirm that the parameter is already in Auto WLM with Priorities (or switch it to Auto WLM with Priorities).
@@ -346,3 +349,6 @@ Implement a solution using the wildcard option. How can this simplify the rules 
 
 ## Before You Leave
 When you are done with the workshop, feel free to delete the stack from the CloudFormation Console.
+
+![GitHub Logo](/images/toronto_advisor_stack_delete.jpg)
+
