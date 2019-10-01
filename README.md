@@ -33,7 +33,7 @@ Please proceed with the workshop once the Redshift cluster is available.
 
 ### Challenge #1b: Connect to the Redshift cluster with the built-in query editor and create a view that is used later:
 
-Find and connect to the Query Editor. The defaults for the workshop are:
+Find and connect to the Query Editor (or you are welcome to use your own editor). The defaults for the workshop are:
 
 * DB: dev
 * Master Username: awsuser
@@ -206,7 +206,7 @@ Changing the table distribution can be done with the ALTER TABLE command:
 
 ### Bonus Challenge #2e: Working with Redshift AUTO distribution. 
 
-Launch in Q1 2019, Redshift can now pick the table distibution for you, and even update the distribution style as the number of rows in the table increases. You can test this by creating a table and running a few COPY commands:
+Launched in Q1 2019, Redshift can now pick the table distibution for you, and even update the distribution style as the number of rows in the table increases. You can test this by creating a table and running a few COPY commands:
 
 Create a test table:
 ```
