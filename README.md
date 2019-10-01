@@ -66,7 +66,7 @@ ORDER BY A.ATTNUM;
 
 ### Challenge #1c: Use the (simulated) Redshift Advisor and compare the impact of compressed and uncompressed columns
 
-The Redshift Advisor is an important element of Redshift’s ease of use. The Advisor will warn if there are tables without compression, which in turn leads to scanning work than would otherwise be required to execute the query.
+The Redshift Advisor is an important element of Redshift’s ease of use proposition. The Advisor will warn if there are tables without compression, which in turn leads to scanning work than would otherwise be required to execute the query.
 
 ![GitHub Logo](/images/toronto_advisor_compress_table.jpg)
 
@@ -127,7 +127,7 @@ Redshift has the ability to run stored procedures, try the stored proc "MinAnaly
 ## Section #2: Distribution (~30 minutes)
 
 ### Challenge #2a: Use the (simulated) Redshift Advisor to identify a table with row skew.
-The Redshift Advisor is an important element of Redshift’s ease of use. Looking at the example Advisor alert, build a skewed table, understand the magnitude of the tuning opportunity, then quickly resolve the issue.
+The Redshift Advisor is an important element of Redshift’s ease of use proposition. Looking at the example Advisor alert, build a skewed table, understand the magnitude of the tuning opportunity, then quickly resolve the issue.
 
 
 ![GitHub Logo](/images/toronto_advisor_skewed_table.jpg)
