@@ -31,7 +31,7 @@ And/or watch the Redshift Console 'Clusters' section for the cluster to become a
 
 Please proceed with the workshop once the Redshift cluster is available.
 
-### Challenge #1b: Connect to the Redshift cluster with the built-in query editor:*
+### Challenge #1b: Connect to the Redshift cluster with the built-in query editor:
 
 Find and connect to the Query Editor. The defaults for the workshop are:
 
