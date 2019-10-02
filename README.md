@@ -118,6 +118,21 @@ ORDER BY 1,2
 ;
 ```
 
+Or you can join to SVV\_TABLE\_INFO and use the table names:
+
+```
+SELECT b.tbl,
+       b.slice,
+       COUNT(b.blocknum)
+FROM stv_blocklist b, svv_table_info t
+WHERE b.tbl = t.table_id 
+and t."table" IN ('orders','uncompressed_orders') 
+GROUP BY 1,2
+ORDER BY 1,2
+;
+```
+
+
 ### Bonus Challenge #1d: Used a stored procedure to analyze a single 'best' column
 
 Redshift has the ability to run stored procedures, try the stored proc "MinAnalyze" to quickly collect stats on public.uncompressed columns. How is this different from ANALYZE PREDICATE COLUMNS? The procedure is in the Redshift Engineer's GitHub repository: [https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/MinAnalyze.sql](https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/MinAnalyze.sql)
