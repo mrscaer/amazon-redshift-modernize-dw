@@ -20,11 +20,11 @@ Login with the provided workshop credentials.
 
 Change to the correct region (us-west-2).
 
-Track the CloudFormation progress from the CloudFormation Console:
+Optionally, you can look at the events completed by the CloudFormation template from the CloudFormation Console:
 
 ![GitHub Logo](/images/toronto_cloudformation_events.jpg)
 
-And/or watch the Redshift Console 'Clusters' section for the cluster to become available:
+And/or review the Redshift Console 'Clusters' section for the cluster to confirm that the cluster is available:
 
 ![GitHub Logo](/images/toronto_redshift_create_events.jpg)
 
@@ -127,6 +127,7 @@ SELECT b.tbl,
 FROM stv_blocklist b, svv_table_info t
 WHERE b.tbl = t.table_id 
 and t."table" IN ('orders','uncompressed_orders') 
+and t.schema = 'public' 
 GROUP BY 1,2
 ORDER BY 1,2
 ;
