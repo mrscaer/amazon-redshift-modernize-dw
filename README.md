@@ -16,7 +16,7 @@ Please get the workshop account credentials from the workshop leaders.
 
 ### Challenge #1a: Login with the provided credentials. This will automatically spin-up an environment using a CloudFormation template:
 
-Login with the provided workshop credentials.
+Login with the provided workshop credentials at https://dashboard.eventengine.run/login
 
 Change to the correct region (us-west-2).
 
