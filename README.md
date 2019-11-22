@@ -243,7 +243,8 @@ Load the table with data from S3 using the COPY command:
 
 ```
 COPY supplier_test FROM 's3://redshift-managed-loads-datasets-us-east-1/dataset=tpch/size=1GB/table=supplier/supplier.manifest'
-iam_role 'arn:aws:iam::999999999999:role/RedshiftImmersionRole' /* <-- Your role goes here. */
+iam_role 'arn:aws:iam::999999999999:role/RedshiftImmersionRole' /* <-- Your role goes here. Scroll up to Challenge #2b:
+ to find the role. */
 region 'us-east-1' gzip delimiter '|' COMPUPDATE OFF MANIFEST;
 ```
 
