@@ -110,7 +110,7 @@ Getting the table IDs from SVV\_TABLE\_INFO (where we can actually look at the â
 ```
 SELECT tbl,
        slice,
-       COUNT(blocknum)
+       COUNT(blocknum) AS num_blocks
 FROM stv_blocklist
 WHERE tbl IN (100485,100392) /* <-- Your table IDs go here. */
 GROUP BY 1,2
@@ -123,7 +123,7 @@ Or you can join to SVV\_TABLE\_INFO and use the table names:
 ```
 SELECT b.tbl,
        b.slice,
-       COUNT(b.blocknum)
+       COUNT(b.blocknum) AS num_blocks
 FROM stv_blocklist b, svv_table_info t
 WHERE b.tbl = t.table_id 
 and t."table" IN ('orders','uncompressed_orders') 
