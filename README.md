@@ -281,7 +281,7 @@ FROM stl_scan s, stl_querytext qt
 WHERE 
   s.query = qt.query
   AND qt."sequence" = 0
-  AND perm_table_name = 'skew_demonstrator2'
+  AND perm_table_name = 'orders'
 GROUP BY s.query, 2, 5
 ORDER BY s.query DESC
 ;
@@ -302,7 +302,7 @@ FROM stl_scan s, stl_querytext qt
 WHERE 
   s.query = qt.query
   AND qt."sequence" = 0
-  AND perm_table_name = 'skew_demonstrator2'
+  AND perm_table_name = 'orders'
 GROUP BY s.query, 2, 5
 ORDER BY s.query DESC
 ;
