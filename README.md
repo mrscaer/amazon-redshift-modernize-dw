@@ -1,4 +1,4 @@
-# AWS Toronto Summit - Redshift Workshop Zero to Hero
+# re:Invent 2019 - Redshift Workshop Zero to Hero [ANT237]
 In this lab you will launch a new Redshift Cluster, setup connectivity and work with 5 important considerations to get the most out of Redshift (SET_DW):
 
 * **S**ort Key
