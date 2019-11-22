@@ -367,7 +367,21 @@ FROM (SELECT o_custkey,
       )
 ;
 
-SELECT pg_last_query_id();
+
+SELECT 
+  qt.query
+  , SUBSTRING("text",1,200) AS query_text
+FROM 
+  stl_querytext qt
+WHERE 
+  qt."sequence" = 0
+  AND LOWER("text") LIKE '%o_totalprice%'
+  AND LOWER("text") NOT LIKE '%stl_querytext%'
+ORDER BY 
+  query DESC
+LIMIT 5
+;
+
 
 SELECT MIN(o_custkey),
        MAX(o_custkey)
@@ -379,7 +393,21 @@ FROM (SELECT o_custkey,
      )
 ;
 
-SELECT pg_last_query_id();
+
+SELECT 
+  qt.query
+  , SUBSTRING("text",1,200) AS query_text
+FROM 
+  stl_querytext qt
+WHERE 
+  qt."sequence" = 0
+  AND LOWER("text") LIKE '%o_totalprice%'
+  AND LOWER("text") NOT LIKE '%stl_querytext%'
+ORDER BY 
+  query DESC
+LIMIT 5
+;
+
 ```
 
 Then, look at the number of rows processed in the columns 'rows_pre_filter' and 'rows_pre_user_filter' for your two queries
