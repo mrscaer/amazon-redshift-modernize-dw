@@ -68,7 +68,7 @@ ORDER BY A.ATTNUM;
 
 The Redshift Advisor is an important element of Redshift’s ease of use proposition. The Advisor will warn if there are tables without compression, which in turn leads to scanning work than would otherwise be required to execute the query.
 
-![GitHub Logo](/images/vegas_advisor_compress_table.jpg)
+![GitHub Logo](/images/toronto_advisor_compress_table.jpg)
 
 Query the Redshift system view SVV_TABLE_INFO to see the list of tables on the cluster.
 
@@ -146,7 +146,7 @@ Redshift has the ability to run stored procedures, try the stored proc "MinAnaly
 The Redshift Advisor is an important element of Redshift’s ease of use proposition. Looking at the example Advisor alert, build a skewed table, understand the magnitude of the tuning opportunity, then quickly resolve the issue.
 
 
-![GitHub Logo](/images/toronto_advisor_skewed_table.jpg)
+![GitHub Logo](/images/vegas_advisor_skewed_table.jpg)
 
 
 ### Challenge #2b: Deliberately create and populate a table with high row skew to see how we can analyze it.
