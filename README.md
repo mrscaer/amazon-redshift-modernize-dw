@@ -272,12 +272,20 @@ SELECT MIN(o_totalprice) FROM public.orders WHERE o_totalprice < 812;
 
 ```
 
-SELECT *
-FROM stl_scan
-WHERE query = pg_last_query_id()
-AND   perm_table_name NOT LIKE 'Internal Worktable%'
-ORDER BY slice, segment, step
+SELECT 
+  s.query
+  , CASE WHEN num_sortkey_as_predicate > 0 THEN 'Used Sort Key Column To Filter Rows' ELSE 'Did Not Use Sort Key Column To Filter Rows' END AS sort_key_helped
+  , SUM(rows) AS number_of_rows_scanned, SUM(bytes) AS number_of_bytes_scanned
+  , SUBSTRING("text",1,200) AS query_text
+FROM stl_scan s, stl_querytext qt
+WHERE 
+  s.query = qt.query
+  AND qt."sequence" = 0
+  AND perm_table_name = 'skew_demonstrator2'
+GROUP BY s.query, 2, 5
+ORDER BY s.query DESC
 ;
+
 ```
 
 ```
@@ -285,12 +293,20 @@ SELECT MIN(o_totalprice) FROM public.orders WHERE o_totalprice > 500000;
 ```
 
 ```
-SELECT *
-FROM stl_scan
-WHERE query = pg_last_query_id()
-AND   perm_table_name NOT LIKE 'Internal Worktable%'
-ORDER BY slice, segment, step
+SELECT 
+  s.query
+  , CASE WHEN num_sortkey_as_predicate > 0 THEN 'Used Sort Key Column To Filter Rows' ELSE 'Did Not Use Sort Key Column To Filter Rows' END AS sort_key_helped
+  , SUM(rows) AS number_of_rows_scanned, SUM(bytes) AS number_of_bytes_scanned
+  , SUBSTRING("text",1,200) AS query_text
+FROM stl_scan s, stl_querytext qt
+WHERE 
+  s.query = qt.query
+  AND qt."sequence" = 0
+  AND perm_table_name = 'skew_demonstrator2'
+GROUP BY s.query, 2, 5
+ORDER BY s.query DESC
 ;
+
 ```
 
 ### Challenge #3b: Working with sort keys to improve query performance: 
