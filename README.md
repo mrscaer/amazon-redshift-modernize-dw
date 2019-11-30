@@ -37,6 +37,7 @@ Find and connect to the Query Editor (or you are welcome to use your own editor)
 
 * DB: dev
 * Master Username: awsuser
+* Password: Awsuser123
 
 Here's the SQL for the view:
 
