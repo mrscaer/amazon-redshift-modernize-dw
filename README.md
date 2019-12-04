@@ -529,7 +529,7 @@ Implement a solution using the wildcard option. How can this simplify the rules 
 * How can you use Amazon QuickSight to crawl and then visualize your Redshift data?
 
 # Before You Leave
-When you are done with the workshop, feel free to delete the stack from the CloudFormation Console.
+When you are done with the workshop, feel free to delete the stack from the CloudFormation Console. The account will be automatically terminated shortly after the conclusion of the workshop.
 
 ![GitHub Logo](/images/toronto_advisor_stack_delete.jpg)
 
