@@ -39,6 +39,8 @@ Find and connect to the Query Editor (or you are welcome to use your own editor)
 * Master Username: awsuser
 * Password: Awsuser123
 
+Note that the query editor currently will only run one SQL statement at a time. So, either highlight the statement you'd like to execute, or maintain only a single statement in each window at a time.
+
 Here's the SQL for the view:
 
 ```
@@ -139,7 +141,7 @@ ORDER BY 1,2
 
 Redshift has the ability to run stored procedures, try the stored proc "MinAnalyze" to quickly collect stats on public.uncompressed columns. How is this different from ANALYZE PREDICATE COLUMNS? The procedure is in the Redshift Engineer's GitHub repository: [https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/sp_analyze_minimal.sql](https://github.com/awslabs/amazon-redshift-utils/blob/master/src/StoredProcedures/sp_analyze_minimal.sql)
 
-
+Note that when you analyze a table, there's no other output than that the statement ran successfully.
 
 # Section #2: Distribution (~30 minutes)
 
