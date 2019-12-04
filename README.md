@@ -108,6 +108,8 @@ SORTKEY (o_orderdate);
 
 `ANALYZE public.uncompressed_orders;`
 
+Note that when you analyze a table, there's no other output than that the statement ran successfully.
+
 Getting the table IDs from SVV\_TABLE\_INFO (where we can actually look at the ‘size’ column to see the number of 1MB blocks, we can further examine this at the slice level with a query against STV_BLOCKLIST:
 
 ```
